@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { CiImageOn } from "react-icons/ci";
 import { AiOutlineDelete } from "react-icons/ai";
 
-import { showToastMessage } from '@/utils/toast';
+import { showToastMessage } from "@/utils/toast";
 
 export default function CreateProject() {
   const [title, setTitle] = useState("");
@@ -81,7 +81,7 @@ export default function CreateProject() {
       reader.readAsDataURL(file); // Read the file as a data URL
     }
   };
-  
+
   const handleLoginSuccess = () => {
     setIsLoggedIn(true); // Update login status
     setIsLoginOpen(false); // Close login modal after successful login
@@ -140,7 +140,7 @@ export default function CreateProject() {
       image,
       content: content.filter((item) => item.trim() !== ""), // Remove empty content items
       author: author, // Include author ID obtained from state
-      classification, 
+      classification,
     };
 
     try {
@@ -163,7 +163,7 @@ export default function CreateProject() {
       setTitle("");
       setContent([]);
       setImageFile(null);
-      setClassification(""); 
+      setClassification("");
       setImage("");
       setErrors({});
       setImagePreview("");
@@ -219,13 +219,13 @@ export default function CreateProject() {
                     Create Blog
                   </h2>
                   <div className="flex justify-end w-full gap-2">
-                    {/* <button
-                    type="button"
-                    onClick={handleAddContent}
-                    className="rounded-full  py-[5px] px-[20px] text-[14px] hover:text-white text-black hover:bg-[#222222]  border-[#222222] border-[1px] cursor-pointer "
-                  >
-                    Add Content
-                  </button> */}
+                      {/* <button
+                      type="button"
+                      onClick={handleAddContent}
+                      className="rounded-full  py-[5px] px-[20px] text-[14px] hover:text-white text-black hover:bg-[#222222]  border-[#222222] border-[1px] cursor-pointer "
+                    >
+                      Add Content
+                    </button> */}
 
                     <button
                       type="submit"
