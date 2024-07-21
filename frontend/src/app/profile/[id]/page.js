@@ -275,41 +275,38 @@ const ProfilePage = ({ params }) => {
                     </div>
                     <hr className="lg:h-screen border-[0.4px] border-gray-300" />
 
-                    <div className="flex flex-col w-full px-4 py-3 shadow-sm lg:w-1/4 text-nowrap">
-                      <div className="flex justify-between">
-                        <div className="flex flex-col items-center">
-                          <p className="text-lg text-gray-700">
-                            {userDetails.followersCount}
-                          </p>
-                          <label className="block mb-2 text-sm font-bold text-gray-700">
-                            Followers
-                          </label>
+                    <div className="flex flex-col w-full gap-2 px-4 py-3 shadow-sm lg:w-1/4 text-nowrap">
+                      <div className="flex flex-col gap-4 ">
+                        <p className="font-semibold">
+                          {userDetails.firstname} {userDetails.lastname}
+                        </p>
+                        <div className="flex justify-between lg:flex-col md:flex-row xl:flex-row">
+                          <div className="flex flex-row items-center gap-2 text-gray-600 text-md">
+                            <p className="">{userDetails.followersCount}</p>
+                            <p className="">Followers</p>
+                          </div>
+                          <div className="flex flex-row items-center gap-2 text-gray-600 text-md">
+                            <p className="">{userDetails.followingCount}</p>
+                            <p className="">Following</p>
+                          </div>
                         </div>
-                        <div className="flex flex-col items-center ">
-                          <p className="text-lg text-gray-700">
-                            {userDetails.followingCount}
-                          </p>
-                          <label className="block mb-2 text-sm font-bold text-gray-700">
-                            Following
-                          </label>
-                        </div>
+                        <button
+                          className="rounded-full  py-[5px] px-[20px] text-[14px] hover:text-white text-black hover:bg-[#222222]  border-[#222222] border-[1px] cursor-pointer flex items-center justify-center w-[140px]"
+                          onClick={handleEditClick}
+                        >
+                          Edit Profile
+                        </button>
                       </div>
-                      <button
-                        className="px-4 py-2 text-sm font-medium text-white bg-[#121212] rounded-md hover:bg-[#222222] focus:outline-none"
-                        onClick={handleEditClick}
-                      >
-                        Edit Profile
-                      </button>
 
-                      <div className="flex flex-col py-2">
-                        <label className="block mb-2 text-lg font-bold text-gray-700">
+                      <div className="flex flex-col py-2 mt-2">
+                        <label className="block mb-2 text-[16px] font-semibold text-gray-800">
                           Followers
                         </label>
                         <ul className="flex flex-col gap-2">
                           {userDetails.followers.map((follower) => (
                             <li
                               key={follower._id}
-                              className="text-[16px] text-gray-500 capitalize"
+                              className="text-[14px] text-gray-500 capitalize"
                             >
                               {follower.firstname} {follower.lastname}
                             </li>
@@ -317,14 +314,14 @@ const ProfilePage = ({ params }) => {
                         </ul>
                       </div>
                       <div className="flex flex-col py-2">
-                        <label className="block mb-2 text-lg font-bold text-gray-700 ">
+                        <label className="block mb-2 text-[16px] font-semibold text-gray-800">
                           Following
                         </label>
                         <ul className="flex flex-col gap-2">
                           {userDetails.following.map((followed) => (
                             <li
                               key={followed._id}
-                              className="text-[16px] text-gray-500 capitalize"
+                              className="text-[14px] text-gray-500 capitalize"
                             >
                               {followed.firstname} {followed.lastname}
                             </li>

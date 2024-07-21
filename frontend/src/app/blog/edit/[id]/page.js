@@ -7,7 +7,7 @@ export default function EditBlog({ params }) {
   const { id } = params;
 
   return (
-    <div className="w-full font-Sansationnormal">
+    <div className="w-full font-Sansationnormal md:px-[16px]">
       <Toaster />
       <div className="container px-4 py-4 mx-auto md:px-0">
         <EditBlogForm id={id}/>
