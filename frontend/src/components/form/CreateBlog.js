@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { CiImageOn } from "react-icons/ci";
 import { AiOutlineDelete } from "react-icons/ai";
 
+import { showToastMessage } from '@/utils/toast';
+
 export default function CreateProject() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState([]);
@@ -68,6 +70,8 @@ export default function CreateProject() {
           // setImage(response.data); // Save classification result
           setImage(e.target.result);
           setClassification(response.data.classification);
+          // Show toast message based on classification result
+          showToastMessage(response.data.classification);
           console.log("Classification result:", response.data);
         } catch (error) {
           console.error("Error classifying image:", error);
