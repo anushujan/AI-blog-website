@@ -137,11 +137,11 @@ const getBlogById = async (req, res) => {
 // Update a blog by ID
 const updateBlog = async (req, res) => {
   const { id } = req.params;
-  const { title, content, author,image } = req.body;
+  const { title, content, author,image ,classification} = req.body;
 
-  // console.log("====================================");
-  // console.log("update" + image);
-  // console.log("====================================");
+  console.log("====================================");
+  console.log("update" + classification);
+  console.log("====================================");
 
   try {
     let blog = await Blog.findById(id);
@@ -181,6 +181,7 @@ const updateBlog = async (req, res) => {
     // Update other blog fields
     if (title) blog.title = title;
     if (content) blog.content = content; // Assign content directly
+    if (classification) blog.classification = classification; // Assign content directly
 
     // Save the updated blog
     await blog.save();

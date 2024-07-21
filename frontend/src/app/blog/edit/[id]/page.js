@@ -135,6 +135,7 @@ export default function EditBlog({ params }) {
         title,
         author,
         content,
+        classification
       };
 
       // if (imageFile) {
