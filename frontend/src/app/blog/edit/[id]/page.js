@@ -5,19 +5,23 @@ import { useRouter } from "next/navigation";
 import { toast, Toaster } from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
 
+import { showToastMessage } from "@/utils/toast";
+
 export default function EditBlog({ params }) {
   const router = useRouter();
   const { id } = params;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState([]);
   const [imageFile, setImageFile] = useState(null);
-  
+
   const [imageUrl, setImageUrl] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [errors, setErrors] = useState({});
   const [author, setAuthor] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [contentErrors, setContentErrors] = useState([]);
+
+  const [classification, setClassification] = useState("");
 
   useEffect(() => {
     const fetchBlogById = async () => {
@@ -57,15 +61,57 @@ export default function EditBlog({ params }) {
     }
   }, [router]);
 
-  const handleFileChange = (e) => {
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setImageFile(file);
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       setImagePreview(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
+  const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImageFile(file);
+      setImageFile(file); // Set the file state if you are using a state management library
+
+      // Create a FileReader to preview the image
       const reader = new FileReader();
-      reader.onload = () => {
-        setImagePreview(reader.result);
+      reader.onload = async (e) => {
+        setImagePreview(e.target.result); // Set image preview
+
+        // Prepare FormData to send the file
+        const formData = new FormData();
+        formData.append("file", file); // Use "file" as the key if your server expects it
+
+        try {
+          // Optionally get a token if authentication is required
+          const token = localStorage.getItem("token");
+          const response = await axios.post(
+            "http://127.0.0.1:9000/classify",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: token ? `Bearer ${token}` : undefined, // Add token if available
+              },
+            }
+          );
+          // setImage(response.data); // Save classification result
+          // setImage(e.target.result);
+          setClassification(response.data.classification);
+          // Show toast message based on classification result
+          showToastMessage(response.data.classification);
+          console.log("Classification result:", response.data);
+        } catch (error) {
+          console.error("Error classifying image:", error);
+          toast.error("Failed to classify image"); // Show error message
+        }
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file); // Read the file as a data URL
     }
   };
 
