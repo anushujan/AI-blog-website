@@ -1,25 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const Blog = require("../models/blogModel");
-const axios = require("axios");
-const FormData = require("form-data");
 
-// Function to send image to Flask API for classification
-// const classifyImage = async (imagePath) => {
-//   try {
-//     const formData = new FormData();
-//     formData.append("image", fs.createReadStream(imagePath));
-//     const response = await axios.post("http://localhost:5000/classify", formData, {
-//       headers: {
-//         ...formData.getHeaders(),
-//       },
-//     });
-//     return response.data.classification;
-//   } catch (err) {
-//     console.error("Error classifying image:", err);
-//     throw err;
-//   }
-// };
 // Function to save Image Base64 in upload folder
 const saveImageFromBase64 = (base64Data, fileName) => {
   try {
@@ -81,50 +63,6 @@ const getBlogs = async (req, res) => {
     res.status(500).json({ error: "Error retrieving blogs" });
   }
 };
-
-// Create a blog iamge classification
-// const createBlog = async (req, res) => {
-//   try {
-//     const { title, image, content, author } = req.body;
-
-//     // Validate input data
-//     if (!title || !image || !content || content.length === 0 || !author) {
-//       throw new Error("Blog title, image, content, and author are required");
-//     }
-
-//     // Generate a unique filename and save the image
-//     const uniqueFileName = `blog-${Date.now()}`;
-//     const savedImageName = saveImageFromBase64(image, uniqueFileName);
-
-//     if (!savedImageName) {
-//       throw new Error("Failed to save image");
-//     }
-
-//     // Classify the saved image
-//     const imagePath = path.join(__dirname, "..", "uploads", savedImageName);
-//     const classification = await classifyImage(imagePath);
-
-//     // Create the blog
-//     const newBlog = new Blog({
-//       title,
-//       image: savedImageName, // Store only the filename
-//       content,
-//       author, // Assign the author field
-//       classification, // Add the classification result to the blog
-//     });
-
-//     await newBlog.save();
-
-//     // Construct the URL to access the saved image
-//     const baseUrl = `${req.protocol}://${req.get("host")}/uploads`;
-//     const imageURL = `${baseUrl}/${savedImageName}`;
-
-//     res.status(201).json({ ...newBlog.toObject(), imageURL });
-//   } catch (err) {
-//     console.error("Error creating blog:", err);
-//     res.status(400).json({ error: err.message });
-//   }
-// };
 
 const createBlog = async (req, res) => {
   try {
