@@ -36,6 +36,11 @@ def prepare_image(image: Image.Image, target_size):
 class ImageClassificationResponse(BaseModel):
     classification: str
 
+
+@app.get("/")
+async def read_root():
+    return {"message": "Image classification API is working"}
+
 @app.post("/classify", response_model=ImageClassificationResponse)
 async def classify(file: UploadFile = File(...)):
     if model is None:
