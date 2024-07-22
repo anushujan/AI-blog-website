@@ -160,9 +160,9 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { firstname, lastname, phone, address, email, role, password, image } =
     req.body;
-    // console.log('====================================');
-    // console.log(image);
-    // console.log('====================================');
+    console.log('====================================');
+    console.log(image + firstname);
+    console.log('====================================');
 
   try {
     // Find the user by ID
@@ -190,24 +190,30 @@ const updateUser = async (req, res) => {
 
     // Check if image is provided for update
     if (image) {
-      // Generate a unique filename and save the image
-      const uniqueFileName = `user-${Date.now()}`;
-      const savedImageName = saveImageFromBase64(image, uniqueFileName);
+      const base64Pattern = /^data:image\/(\w+);base64,(.+)$/;
+      if (base64Pattern.test(image)) {
+        // Generate a unique filename and save the image
+        const uniqueFileName = `user-${Date.now()}`;
+        const savedImageName = saveImageFromBase64(image, uniqueFileName);
 
-      if (!savedImageName) {
-        return res.status(500).json({ error: "Failed to save image" });
-      }
-
-      // Delete old image if it exists
-      if (user.image) {
-        const oldImagePath = path.join(__dirname, "..", "uploads", user.image);
-        if (fs.existsSync(oldImagePath)) {
-          fs.unlinkSync(oldImagePath);
+        if (!savedImageName) {
+          return res.status(500).json({ error: "Failed to save image" });
         }
-      }
 
-      // Update user's image field
-      user.image = savedImageName;
+        // Delete old image if it exists
+        if (user.image) {
+          const oldImagePath = path.join(__dirname, "..", "uploads", user.image);
+          if (fs.existsSync(oldImagePath)) {
+            fs.unlinkSync(oldImagePath);
+          }
+        }
+
+        // Update user's image field
+        user.image = savedImageName;
+      } else {
+        // If image is not a valid base64, skip updating the image
+        console.warn('Invalid base64 image format');
+      }
     }
 
     user = await user.save();

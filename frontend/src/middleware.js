@@ -55,5 +55,6 @@ function verifyToken(token) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/", "/blogs", "/profile/:id*"],
+  // matcher: ["/", "/blogs", "/profile/:id*"],
+  matcher: ["/", "/blogs"],
 };
