@@ -28,5 +28,8 @@ router.post('/users/unfollow', userController.unfollowUser);
 // Get followed users for logged-in user
 router.get('/users/:id/followed',userController.getFollowedUsers);
 
+// In routes/blogRoutes.js or a similar file
+router.get('/users/:id/blogs', userController.getUserBlogs);
+
 
 module.exports = router;

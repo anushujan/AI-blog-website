@@ -21,4 +21,5 @@ router.put('/:id', blogController.updateBlog);
 router.delete('/:id', blogController.deleteBlog);
 // router.delete('/:id', authMiddleware, blogController.deleteBlog);
 
+
 module.exports = router;

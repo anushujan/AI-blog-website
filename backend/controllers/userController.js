@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const fs = require("fs");
 const path = require("path");
+const Blog = require("../models/blogModel");
 
 // Function to save Image Base64 in upload folder
 const saveImageFromBase64 = (base64Data, fileName) => {
@@ -366,6 +367,30 @@ const unfollowUser = async (req, res) => {
   }
 };
 
+// Get all blogs for a particular user
+const getUserBlogs = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    // Find blogs where the author field matches the provided user ID
+    const blogs = await Blog.find({ author: userId })
+      .populate('author', 'firstname lastname') // Optionally populate author details
+      .exec();
+
+    // Check if any blogs were found
+    if (blogs.length === 0) {
+      return res.status(404).json({ message: 'No blogs found for this user.' });
+    }
+
+    // Respond with the found blogs
+    res.json(blogs);
+  } catch (error) {
+    console.error('Error fetching user blogs:', error);
+    res.status(500).json({ message: 'Error fetching blogs' });
+  }
+};
+
+
 module.exports = {
   getUsers,
   createUser,
@@ -376,4 +401,5 @@ module.exports = {
   followUser,
   getFollowedUsers,
   unfollowUser,
+  getUserBlogs,
 };
