@@ -3,6 +3,7 @@ const connectDB = require("./config/dbconfig");
 
 const userRoutes = require("./routes/userRoutes");
 const blogRoutes = require("./routes/blogRoutes");
+const queryRouter = require("./routes/queryRouter");
 
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -42,6 +43,14 @@ connectDB();
 // API routes
 app.use("/api", userRoutes);
 app.use("/api/blogs", blogRoutes);
+app.use("/api/query", queryRouter);
+
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ message: 'Server is running successfully!' });
+});
+app.get('/', (req, res) => {
+  res.status(200).json({ message: 'Welcome Satkunarasa Anushujan' });
+});
 
 // Start the server
 const port = process.env.PORT || 8000;
