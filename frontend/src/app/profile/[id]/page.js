@@ -13,6 +13,7 @@ const ProfilePage = ({ params }) => {
   const [userDetails, setUserDetails] = useState(null);
   const [activeTab, setActiveTab] = useState("home");
   const [blogs, setBlogs] = useState([]);
+  const [showAllBlogs, setShowAllBlogs] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -50,7 +51,9 @@ const ProfilePage = ({ params }) => {
 
   const fetchUserBlogs = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/users/${userId}/blogs`);
+      const response = await axios.get(
+        `http://localhost:8000/api/users/${userId}/blogs`
+      );
       setBlogs(response.data);
     } catch (error) {
       console.error("Error fetching user blogs:", error);
@@ -73,17 +76,39 @@ const ProfilePage = ({ params }) => {
               onTabChange={handleTabChange}
               id={id}
             />
-            <div className="lg:w-3/4">
+            <div className="lg:w-full">
               {activeTab === "home" && userDetails && (
                 <div className="flex w-full flex-col gap-[30px] p-2">
-                {blogs.length > 0 ? (
-                  blogs.map((blog) => (
-                    <Blogcard blog={blog}/>
-                  ))
-                ) : (
-                  <p>No blogs found.</p>
-                )}
-              </div>
+                  {blogs.length > 0 ? (
+                    <>
+                      {blogs
+                        .slice(0, showAllBlogs ? blogs.length : 3)
+                        .map((blog) => (
+                          <Blogcard key={blog._id} blog={blog} />
+                        ))}
+                      <div className="flex items-end justify-end w-full">
+                        {!showAllBlogs && blogs.length > 3 && (
+                          <button
+                            onClick={() => setShowAllBlogs(true)}
+                            className="rounded-full  py-[5px] px-[20px] text-[14px] hover:text-white w-[120px] text-black hover:bg-[#222222]  border-[#222222] border-[1px] cursor-pointer"
+                          >
+                            View More
+                          </button>
+                        )}
+                        {showAllBlogs && (
+                          <button
+                            onClick={() => setShowAllBlogs(false)}
+                            className="rounded-full  py-[5px] px-[20px] text-[14px] hover:text-white w-[120px] text-black hover:bg-[#222222]  border-[#222222] border-[1px] cursor-pointer"
+                          >
+                            View Less
+                          </button>
+                        )}
+                      </div>
+                    </>
+                  ) : (
+                    <p>No blogs found.</p>
+                  )}
+                </div>
               )}
               {activeTab === "about" && (
                 <div className="flex w-full flex-col gap-[30px] p-2">
