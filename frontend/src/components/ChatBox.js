@@ -70,7 +70,7 @@ const ChatBox = () => {
       {/* Chat Floating Button */}
       <div
         onClick={toggleChatBox}
-        className="fixed flex items-center justify-center text-white bg-[#000000] rounded-full shadow-lg cursor-pointer bottom-4 right-4 w-14 h-14 hover:bg-[#1b1b1b]"
+        className="fixed z-50 flex items-center justify-center text-white bg-[#000000] rounded-full shadow-lg cursor-pointer bottom-4 right-4 w-14 h-14 hover:bg-[#1b1b1b]"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +89,7 @@ const ChatBox = () => {
       {isOpen && (
         <div
           ref={chatBoxRef}
-          className="fixed flex flex-col md:w-[400px] sm:w-[400px] w-full bg-white border border-gray-300 rounded-lg shadow-lg bottom-20 right-4 h-96"
+          className="fixed flex flex-col z-50 md:w-[400px] sm:w-[400px] w-full bg-white border border-gray-300 rounded-lg shadow-lg bottom-20 sm:right-4 h-[400px] sm:h-[500px]"
         >
           <div className="flex-1 p-4 overflow-y-auto">
             {messages.map((msg, index) => (
