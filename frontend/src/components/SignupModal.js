@@ -128,7 +128,7 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
       setPassword("");
       setConfirmPassword("");
       setRole("user");
-      
+
       setImage("");
 
       onClose();
@@ -155,15 +155,71 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
 
   return (
     <div
-      className={`fixed inset-0 flex items-center justify-center ${
+      className={`fixed inset-0 flex items-center justify-center overflow-scroll  ${
         isOpen ? "" : "hidden"
       }`}
     >
       <div className="fixed inset-0 bg-black opacity-50"></div>
-      <div className="z-50 w-full max-w-xl p-6 bg-white rounded-lg shadow-lg">
+      <div className="z-50 w-full max-w-2xl p-6 bg-white rounded-lg shadow-lg mt-[140px] md:mt-0">
         <h2 className="mb-4 text-xl font-bold">Sign Up</h2>
-        <form onSubmit={handleSignup}>
-          <div className="flex w-full gap-4 mb-4">
+        <form onSubmit={handleSignup} className="">
+          <div className="mb-4">
+            <label className="block text-gray-700">Image</label>
+            <div class="flex items-start justify-start w-full mt-3">
+              <label
+                for="dropzone-file"
+                class="flex flex-col items-center justify-center h-32 w-32 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+              >
+                <div class="flex flex-col items-center justify-center pt-5 pb-6 z-20">
+                  <svg
+                    class="w-12 h-12 mb-0 text-gray-500 dark:text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                  >
+                    <g
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-width="1.5"
+                    >
+                      <path
+                        stroke-linejoin="round"
+                        d="M21.25 13V8.5a5 5 0 0 0-5-5h-8.5a5 5 0 0 0-5 5v7a5 5 0 0 0 5 5h6.26"
+                      />
+                      <path
+                        stroke-linejoin="round"
+                        d="m3.01 17l2.74-3.2a2.2 2.2 0 0 1 2.77-.27a2.2 2.2 0 0 0 2.77-.27l2.33-2.33a4 4 0 0 1 5.16-.43l2.47 1.91M8.01 10.17a1.66 1.66 0 1 0-.02-3.32a1.66 1.66 0 0 0 .02 3.32"
+                      />
+                      <path
+                        stroke-miterlimit="10"
+                        d="M18.994 15.5v5M16.5 18.005h5"
+                      />
+                    </g>
+                  </svg>
+                </div>
+                <input
+                  id="dropzone-file"
+                  type="file"
+                  class="hidden"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
+                {imagePreview && (
+                  <img
+                    src={imagePreview}
+                    alt="Preview"
+                    className="absolute z-10 object-cover w-32 h-32 rounded-full shadow-sm "
+                  />
+                )}
+                {imageError && (
+                  <span className="text-red-500 text-[14px] pt-4">
+                    {imageError}
+                  </span>
+                )}
+              </label>
+            </div>
+          </div>
+          <div className="flex flex-col w-full gap-4 mb-4 md:flex-row">
             <div className="flex-1">
               <label
                 htmlFor="firstname"
@@ -209,29 +265,8 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
               )}
             </div>
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Image</label>
-            <input
-              type="file"
-              accept="image/*"
-              className={`block w-full px-3 mt-1 border border-black rounded-md shadow-sm focus:outline-none focus:ring-[#121212] focus:border-[#121212] sm:text-sm `}
-              onChange={handleFileChange}
-            />
-            {imageError && (
-              <span className="text-red-500 text-[14px] pt-4">
-                {imageError}
-              </span>
-            )} 
-            {imagePreview && (
-              <img
-                src={imagePreview}
-                alt="Preview"
-                className="mt-2 rounded-md shadow-sm w-full object-contain h-[250px]"
-              />
-            )}
-          </div>
 
-          <div className="flex w-full gap-4 mb-4">
+          <div className="flex flex-col w-full gap-4 mb-4 md:flex-row">
             <div className="flex-1">
               <label
                 htmlFor="phone"
@@ -301,7 +336,7 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
             )}
           </div>
 
-          <div className="flex w-full gap-4 mb-4">
+          <div className="flex flex-col w-full gap-4 mb-4 md:flex-row">
             <div className="flex-1">
               <label
                 htmlFor="password"
