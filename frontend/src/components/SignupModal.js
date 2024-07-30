@@ -167,7 +167,7 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
             <label className="block text-gray-700">Image</label>
             <div class="flex items-start justify-start w-full mt-3">
               <label
-                for="dropzone-file"
+                for="dropzone-file2"
                 class="flex flex-col items-center justify-center h-32 w-32 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
               >
                 <div class="flex flex-col items-center justify-center pt-5 pb-6 z-20">
@@ -198,7 +198,7 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
                   </svg>
                 </div>
                 <input
-                  id="dropzone-file"
+                  id="dropzone-file2"
                   type="file"
                   class="hidden"
                   accept="image/*"
