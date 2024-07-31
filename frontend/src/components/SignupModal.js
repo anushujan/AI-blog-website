@@ -163,8 +163,31 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
       }`}
     >
       <div className="fixed inset-0 bg-black opacity-50"></div>
-      <div className="z-50 w-full max-w-2xl p-6 bg-white rounded-lg shadow-lg mt-[140px] md:mt-0">
-        <h2 className="mb-4 text-xl font-bold">Sign Up</h2>
+      <div className="z-50 w-full max-w-2xl p-6 bg-white rounded-lg shadow-lg mt-[180px] md:mt-0">
+        <div className="flex items-center justify-between w-full">
+          <h2 className="mb-4 text-xl font-bold">Create Account</h2>
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-gray-500 hover:text-red-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="2em"
+              height="2em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-width="1.5"
+                d="m14.5 9.5l-5 5m0-5l5 5M22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464c.974.974 1.3 2.343 1.41 4.536"
+              />
+            </svg>
+          </button>
+        </div>
+
         <form onSubmit={handleSignup} className="">
           <div className="mb-4">
             <label className="block text-gray-700">Image</label>
@@ -238,7 +261,7 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
                   setFirstname(e.target.value);
                   setFirstnameError("");
                 }}
-                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#121212] focus:border-[#121212] sm:text-sm"
+                className="block w-full px-3 py-3  mt-1 border-0 border-b-[1px] border-gray-400 rounded-none shadow-none focus:outline-none focus:ring-0 focus:ring-[#aeaeae] focus:border-gray-400 focus:bg-gray-50 sm:text-sm"
                 placeholder="Enter your first name"
               />
               {firstnameError && (
@@ -260,7 +283,7 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
                   setLastname(e.target.value);
                   setLastnameError("");
                 }}
-                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#121212] focus:border-[#121212] sm:text-sm"
+                className="block w-full px-3 py-3  mt-1 border-0 border-b-[1px] border-gray-400 rounded-none shadow-none focus:outline-none focus:ring-0 focus:ring-[#aeaeae] focus:border-gray-400 focus:bg-gray-50 sm:text-sm"
                 placeholder="Enter your last name"
               />
               {lastnameError && (
@@ -285,7 +308,7 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
                   setPhone(e.target.value);
                   setPhoneError("");
                 }}
-                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#121212] focus:border-[#121212] sm:text-sm"
+                className="block w-full px-3 py-3  mt-1 border-0 border-b-[1px] border-gray-400 rounded-none shadow-none focus:outline-none focus:ring-0 focus:ring-[#aeaeae] focus:border-gray-400 focus:bg-gray-50 sm:text-sm"
                 placeholder="Enter your phone number"
               />
               {phoneError && (
@@ -307,7 +330,7 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
                   setAddress(e.target.value);
                   setAddressError("");
                 }}
-                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#121212] focus:border-[#121212] sm:text-sm"
+                className="block w-full px-3 py-3  mt-1 border-0 border-b-[1px] border-gray-400 rounded-none shadow-none focus:outline-none focus:ring-0 focus:ring-[#aeaeae] focus:border-gray-400 focus:bg-gray-50 sm:text-sm"
                 placeholder="Enter your address"
               />
               {/* {addressError && (
@@ -331,7 +354,7 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
                 setEmail(e.target.value);
                 setEmailError("");
               }}
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#121212] focus:border-[#121212] sm:text-sm"
+              className="block w-full px-3 py-3  mt-1 border-0 border-b-[1px] border-gray-400 rounded-none shadow-none focus:outline-none focus:ring-0 focus:ring-[#aeaeae] focus:border-gray-400 focus:bg-gray-50 sm:text-sm"
               placeholder="Enter your email"
             />
             {emailError && (
@@ -355,7 +378,7 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
                   setPassword(e.target.value);
                   setPasswordError("");
                 }}
-                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#121212] focus:border-[#121212] sm:text-sm"
+                className="block w-full px-3 py-3  mt-1 border-0 border-b-[1px] border-gray-400 rounded-none shadow-none focus:outline-none focus:ring-0 focus:ring-[#aeaeae] focus:border-gray-400 focus:bg-gray-50 sm:text-sm"
                 placeholder="Enter your password"
               />
               {passwordError && (
@@ -377,7 +400,7 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
                   setConfirmPassword(e.target.value);
                   setConfirmPasswordError("");
                 }}
-                className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#121212] focus:border-[#121212] sm:text-sm"
+                className="block w-full px-3 py-3  mt-1 border-0 border-b-[1px] border-gray-400 rounded-none shadow-none focus:outline-none focus:ring-0 focus:ring-[#aeaeae] focus:border-gray-400 focus:bg-gray-50 sm:text-sm"
                 placeholder="Confirm your password"
               />
               {confirmPasswordError && (
@@ -418,15 +441,8 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
 
           <div className="flex justify-end">
             <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 mr-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none"
-            >
-              Close
-            </button>
-            <button
               type="submit"
-              className={`px-4 py-2 text-sm font-medium text-white bg-[#121212] rounded-md hover:bg-[#222222] focus:outline-none ${
+              className={`rounded-full  py-[5px] px-[20px] text-[14px] text-white hover:text-black bg-[#222222]  border-[#222222] hover:bg-white border-[1px] cursor-pointer ${
                 isLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
               disabled={isLoading}
