@@ -86,6 +86,9 @@ export default function Header() {
     localStorage.removeItem("userRole");
     localStorage.removeItem("userId");
     toast.success("Logged out successfully!");
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000); // Adjust the delay as needed
   };
 
   const toggleSearch = () => {
@@ -101,7 +104,6 @@ export default function Header() {
   // const handleSearchChange = (e) => {
   //   setSearchTerm(e.target.value);
   // };
-
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();

@@ -132,8 +132,11 @@ const SignupModal = ({ isOpen, onClose, onSignupSuccess }) => {
       setImage("");
 
       onClose();
-      onSignupSuccess();
+      // onSignupSuccess();
       toast.success("Signed up successfully!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000); // Adjust the delay as needed
     } catch (error) {
       toast.error("Something went wrong. Please try again later.");
     }

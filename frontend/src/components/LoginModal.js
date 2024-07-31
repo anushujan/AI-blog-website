@@ -47,9 +47,14 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
         email,
         password,
       });
-      
-      const { token, email: userEmail, role: userRole, _id: userId, } = response.data;
-     console.log(userId);
+
+      const {
+        token,
+        email: userEmail,
+        role: userRole,
+        _id: userId,
+      } = response.data;
+      console.log(userId);
       localStorage.setItem("userId", userId);
       localStorage.setItem("token", token);
       localStorage.setItem("userEmail", userEmail);
@@ -59,8 +64,12 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
       setPassword("");
 
       onClose();
-      onLoginSuccess();
+      // onLoginSuccess();
       toast.success("Logged in successfully!");
+      
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000); // Adjust the delay as needed
     } catch (error) {
       if (error.response && error.response.status === 401) {
         toast.error("Invalid email or password.");
