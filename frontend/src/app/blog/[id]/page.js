@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react"; // Import useRouter from 'next/router'
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import BlogNav from "@/components/BlogNav";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -15,6 +16,7 @@ export default function BlogDetail({ params }) {
   const [error, setError] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
   const [isAuthor, setIsAuthor] = useState(false);
+  const [isImageVisible, setIsImageVisible] = useState(false); // New state
 
   useEffect(() => {
     const fetchBlogBySlug = async () => {
@@ -70,6 +72,10 @@ export default function BlogDetail({ params }) {
     }
   };
 
+  const toggleImageVisibility = () => {
+    setIsImageVisible((prev) => !prev); // Toggle visibility
+  };
+
   return (
     <div className="text-black px-[16px]">
       <Toaster />
@@ -99,18 +105,42 @@ export default function BlogDetail({ params }) {
                     onClick={handleDelete}
                     className="text-sm font-medium text-white"
                   >
-                    <AiOutlineDelete className="w-6 h-6 text-red-600 cursor-pointer"/>
+                    <AiOutlineDelete className="w-6 h-6 text-red-600 cursor-pointer" />
                   </button>
                 </div>
               )}
             </div>
-
+            {/* classification "violent" */}
             <div className="mt-6 bg-white">
-              <img
-                src={blog.image}
-                alt={blog.title}
-                className="object-cover w-full h-full"
-              />
+              {blog.classification === "non-violent" && (
+                <img
+                  src={blog.image}
+                  alt={blog.title}
+                  className="object-cover w-full h-full"
+                />
+              )}
+              {blog.classification === "violent" && (
+                <div className="relative">
+                  <img
+                    src={blog.image}
+                    alt={blog.title}
+                    className={`object-cover w-full h-full transition-all duration-300 ${
+                      isImageVisible ? "blur-0" : "blur-xl"
+                    }`}
+                  />
+                  <button
+                    onClick={toggleImageVisibility}
+                    className="absolute p-2 bg-gray-700 bg-opacity-75 border rounded-full top-4 right-4"
+                  >
+                    {isImageVisible ? (
+                      <AiOutlineEyeInvisible className="w-6 h-6 text-white" />
+                    ) : (
+                      <AiOutlineEye className="w-6 h-6 text-white" />
+                    )}
+                  </button>
+                </div>
+              )}
+
               {/* <p className="mt-3 text-gray-700">{blog.content}</p> */}
               {Array.isArray(blog.content) &&
                 blog.content.map((paragraph, index) => (

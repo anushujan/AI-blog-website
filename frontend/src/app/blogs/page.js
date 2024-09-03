@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import BlogNav from "@/components/BlogNav";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -18,6 +19,11 @@ const BlogListingPage = () => {
   const [users, setUsers] = useState([]);
   const [followedUsers, setFollowedUsers] = useState([]);
   const [loggedUserId, setLoggedUserId] = useState(null); // Initialize state for loggedUserId
+  const [isImageVisible, setIsImageVisible] = useState(false); // New state
+
+  const toggleImageVisibility = () => {
+    setIsImageVisible((prev) => !prev); // Toggle visibility
+  };
 
   useEffect(() => {
     const tab = searchParams.get("tab");
@@ -135,7 +141,9 @@ const BlogListingPage = () => {
   // Filtered blogs based on activeTab state
   const filteredBlogs = activeTab
     ? blogs.filter((blog) => {
-        const titleMatch = blog.title.toLowerCase().includes(activeTab.toLowerCase());
+        const titleMatch = blog.title
+          .toLowerCase()
+          .includes(activeTab.toLowerCase());
         const contentMatch = blog.content
           .join(" ")
           .toLowerCase()
@@ -167,7 +175,7 @@ const BlogListingPage = () => {
 
       <div className="container flex flex-col pb-6 mx-auto lg:flex-row-reverse">
         <div className="flex flex-col w-full h-full gap-2 p-2 bg-gray-0 lg:w-1/4 allUsersView">
-          <StartaWrite/>
+          <StartaWrite />
           <Whotofollow
             users={users}
             loggedUserId={loggedUserId}
@@ -194,11 +202,40 @@ const BlogListingPage = () => {
                   key={blog._id}
                   className="flex flex-col gap-2 bg-white shadow-sm md:flex-row"
                 >
-                  <img
+                  {blog.classification === "non-violent" && (
+                    <img
+                      src={blog.image}
+                      alt={blog.title}
+                      className="h-[200px] md:w-[200px] w-full object-cover"
+                    />
+                  )}
+                  {blog.classification === "violent" && (
+                    <div className="relative">
+                      <img
+                        src={blog.image}
+                        alt={blog.title}
+                        className={`h-[200px] md:w-[200px] w-full object-cover ${
+                          isImageVisible ? "blur-0" : "blur-xl"
+                        }`}
+                      />
+                      <button
+                        onClick={toggleImageVisibility}
+                        className="absolute p-2 bg-gray-700 bg-opacity-75 border rounded-full top-4 right-4"
+                      >
+                        {isImageVisible ? (
+                          <AiOutlineEyeInvisible className="w-6 h-6 text-white" />
+                        ) : (
+                          <AiOutlineEye className="w-6 h-6 text-white" />
+                        )}
+                      </button>
+                    </div>
+                  )}
+
+                  {/* <img
                     src={blog.image}
                     alt={blog.title}
                     className="h-[200px] md:w-[200px] w-full object-cover"
-                  />
+                  /> */}
                   <div className="flex flex-col flex-1 gap-2 px-2 py-3 overflow-hidden">
                     <h3 className="mt-2 text-lg font-semibold normal-case">
                       {truncateTitle(blog.title)}

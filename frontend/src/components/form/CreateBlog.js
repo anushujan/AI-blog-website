@@ -58,7 +58,7 @@ export default function CreateProject() {
           // Optionally get a token if authentication is required
           const token = localStorage.getItem("token");
           const response = await axios.post(
-            "http://127.0.0.1:9000/classify",
+            "http://127.0.0.1:7000/classify",
             formData,
             {
               headers: {
