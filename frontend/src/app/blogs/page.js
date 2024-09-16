@@ -9,7 +9,7 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 import Whotofollow from "@/components/Whotofollow";
 import StartaWrite from "@/components/StartaWrite";
 
-const BlogListingPage = () => {
+const Page = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -299,4 +299,4 @@ const BlogListingPage = () => {
   );
 };
 
-export default BlogListingPage;
+export default Page;
